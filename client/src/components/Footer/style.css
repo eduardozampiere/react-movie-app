@@ -1,0 +1,27 @@
+footer{
+    height: var(--footer-height);
+    background-color: #222;
+    color: #fff;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    justify-items: center;
+    align-items: center;
+    font-size: 14px;
+}
+
+footer > span > span{
+    opacity: 0.7;
+}
+
+footer > span > a{
+    color: lightblue;
+    text-decoration: none;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: linear 0.1s;
+}
+
+footer > span > a:hover{
+    opacity: 1;
+}
