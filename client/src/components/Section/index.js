@@ -23,9 +23,10 @@ function Section(props) {
 		return movie.genre_ids.map(id => {
 			return genres.map(g => {
 				if(g.id === id){											
-					return <span>{g.name}</span>
+					return <span key={g.id}>{g.name}</span>
 				}
-				return <></>
+				// return <></>
+				return false;
 			})
 		})
 	}

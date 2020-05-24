@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 
 import Section from '../Section';
-
+import Elenco from '../Elenco';
 import API from '../../api/api';
 
 import './style.css';
@@ -12,11 +12,10 @@ function MovieDetail(props) {
 	const [cast, setCast] = useState([]);
 	const [director, setDirector] = useState([]);
 	const [genres, setGenres] = useState();
-	
+
 	useEffect( () => {
 		API.movies.detail(id).then(r => {
 			setMovie(r.data);
-			console.log(r.data);
 		});
 
 		API.movies.credits(id).then(r => {
@@ -102,7 +101,7 @@ function MovieDetail(props) {
 					</div>
 					<div className="movie-footer">
 						<div className="realease-date">Lançamento: <b>{ formatDate(movie.release_date) }</b></div>
-						<div className="duration">Duração: <b>{ movie.runtime }s</b></div>
+						<div className="duration">Duração: <b>{ movie.runtime }m</b></div>
 						<div className="budget">Orçamento: <b>{ formatValue(movie.budget) }</b></div>
 						<div className="revenue">Faturamento: <b>{ formatValue(movie.revenue) }</b> </div>
 					</div>
@@ -110,10 +109,8 @@ function MovieDetail(props) {
 			</div>
 			
 			<Section title="Recomendados" f={() => API.movies.recommendations(id)} genres={genres} limit={5}/>
-
-			<div className="casting">
-				
-			</div>
+			
+			<Elenco cast={cast}/>
 		</>
 	)
 	

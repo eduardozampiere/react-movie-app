@@ -1,0 +1,80 @@
+.movie-cast{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-left: 80px;
+    padding-right: 80px;
+}
+
+.cast-person{
+    width: 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 1px 2px 3px #222;
+    border-radius: 4px;
+    transition: cubic-bezier(.34,2,.6,1) 0.2s;
+}
+
+.cast-person:hover{
+    transform: translate(0px, -10px);
+
+}
+
+.cast-person .person-header > img{
+    width: 100%;
+    height: 300px;
+    border-radius: 4px 4px 0px 0px;
+    vertical-align: middle;
+}
+
+.cast-person .person-body{
+    height: 40px;
+    font-size: 14px;
+    background-color: #222;
+    padding: 10px 10px;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+}
+
+.cast-person a{
+    text-decoration: none;
+}
+
+.person-name{
+    font-size: 15px;
+    color: #fff;
+}
+
+.person-character{
+    font-size: 13px;
+    color: #ddd
+}
+
+.movie-cast-header{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 80px;
+}
+
+.movie-cast-header > div > span{
+    position: relative;
+    top: 8px;
+    font-size: 14px;
+    color: #333;
+    padding-right: 10px;
+}
+
+.switch{
+    margin-top: 30px;
+}
+
+h3{
+    margin: 30px 0px 30px 80px;
+    font-size: 25px;
+    display: inline-block;
+    padding: 10px 40px;
+    border-radius: 4px;
+    box-shadow: 1px 1px 2px #333;
+    color: #fff;
+    background-color: #1ec7c7;
+}
