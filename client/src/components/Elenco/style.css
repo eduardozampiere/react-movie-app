@@ -80,3 +80,33 @@ h3{
     color: #fff;
     background-color: #1ec7c7;
 }
+
+
+@media (max-width: 767px){
+    h3{
+        font-size: 15px;
+        margin: 20px 0px 30px 20px !important;
+    }
+
+    .movie-cast-header{
+        margin-right: 20px;
+    }
+
+    .movie-cast-header > div > span{
+        display: none;
+    }
+
+    .switch{
+        margin-top: 20px !important;
+    }
+
+    .movie-cast{
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .cast-person{
+        width: 100%;
+    }
+
+}

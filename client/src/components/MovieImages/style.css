@@ -65,3 +65,11 @@
     top: 20px;
     cursor: pointer;
 }
+
+@media (max-width: 767px){
+    .images-movie{
+        width: calc(100% - 40px);
+        margin-left: 20px;
+    }
+
+}
