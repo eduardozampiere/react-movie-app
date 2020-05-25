@@ -25,17 +25,24 @@ function Routes() {
 						</Container>
 					</Route>
 
+					<Route exact path="/person/:id">
+						<Container>
+							<h1>Person page</h1>
+						</Container>
+					</Route>
+
+					<Route exact path="/company/:id">
+						<Container>
+							<h1>Company</h1>
+						</Container>
+					</Route>
+
 					<Route extac path="/:media/:id">
 						<Container>
 							<MovieDetail />
 						</Container>
 					</Route>
 
-					<Route exact path="/person/:id">
-						<Container>
-							<h1>Person page</h1>
-						</Container>
-					</Route>
 				</Switch>
 			</Suspense>
 		</Router>

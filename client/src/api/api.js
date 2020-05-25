@@ -68,6 +68,10 @@ const API = {
 			return await axios.get(`${API_SEARCH}/movie?api_key=${API_AUTH_KEY}&language=${API_LANG}&query=${movie}`);
 		},
 
+		tv: async (movie) => {
+			return await axios.get(`${API_SEARCH}/tv?api_key=${API_AUTH_KEY}&language=${API_LANG}&query=${movie}`);
+		},
+
 		person: async (person) => {
 			return await axios.get(`${API_SEARCH}/person?api_key=${API_AUTH_KEY}&language=${API_LANG}&query=${person}`);
 		}
@@ -109,6 +113,10 @@ const API = {
 		},
 
 		images: async (movie_id) => {
+			return await axios.get(`${API_TV_URL}/${movie_id}/images?api_key=${API_AUTH_KEY}`);
+		},
+
+		seasons: async (movie_id) => {
 			return await axios.get(`${API_TV_URL}/${movie_id}/images?api_key=${API_AUTH_KEY}`);
 		}
 	}

@@ -5,12 +5,13 @@ import API from '../../api/api';
 
 import './style.css';
 function MovieImages(props) {
-	const {id} = props;
+	const {id, api} = props;
 	const [images, setImages] = useState([]);
 	const [openedImage, setOpenedImage] = useState(0);
 
 	useEffect( () => {
-		API.movies.images(id).then(r => {
+		console.log(api);
+		api.images(id).then(r => {
 			setImages(r.data.backdrops);
 		});
 	}, [id]);

@@ -158,10 +158,8 @@ function MovieDetail(props) {
 					</div>
 				</div>
 			</div>
-			<MovieImages id={id}/>
-
+			<MovieImages id={id} api={medias[media]} />
 			<Section title="Recomendados" f={() => medias[media].recommendations(id)} genres={genres} to={media} limit={5}/>
-			
 			<Elenco cast={cast}/>
 		</>
 	)

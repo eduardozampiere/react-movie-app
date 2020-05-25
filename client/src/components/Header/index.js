@@ -1,8 +1,109 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './style.css';
 import { Link } from 'react-router-dom';
+import API from '../../api/api';
 
 function Header() {
+	const [search, setSearch] = useState('');
+	const [results, setResults] = useState([]);
+	const [resultsTv, setResultsTv] = useState([]);
+	const [resultsPerson, setResultsPerson] = useState([]);
+	useEffect( () => {
+		if(search.length > 3){
+			API.search.movie(search).then(r => {
+				document.getElementsByClassName('search-result')[0].style.display = 'block';
+				setResults(r.data.results);
+				API.search.tv(search).then(t => {
+					setResultsTv(t.data.results);
+					API.search.person(search).then(p => {
+						setResultsPerson(p.data.results)
+					});
+				})
+			})
+		}
+		else{
+			document.getElementsByClassName('search-result')[0].style.display = 'none';
+		}
+	}, [search])
+	
+	
+	function handleChange(e){
+		setSearch(e.target.value);
+	}
+
+
+	function renderResultsPerson(){
+		console.log(resultsPerson)
+		return resultsPerson.slice(0, 10).map(r => {
+			return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
+					<Link to={`/person/${r.id}`}>
+						<div className='search-image'>
+							<img src={API.image(r.profile_path, 'w200')}/>
+						</div>
+
+						<div className="search-content">
+							<div className="search-name">
+								{r.name}
+							</div>
+
+							<div className="search-description">
+								{r.known_for_department}
+							</div>
+						</div>
+					</Link>
+					</div>
+		})
+	}
+
+
+	function renderResultsTv(){
+		console.log(resultsTv);
+		return resultsTv.slice(0, 10).map(r => {
+			return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
+					<Link to={`/tv/${r.id}`}>
+						<div className='search-image'>
+							<img src={API.image(r.poster_path, 'w200')}/>
+						</div>
+
+						<div className="search-content">
+							<div className="search-name">
+								{r.name}
+							</div>
+
+							<div className="search-description">
+								{r.overview}
+							</div>
+						</div>
+					</Link>
+					</div>
+		})
+	}
+
+
+	function renderResults(){
+		return (
+			results.slice(0, 10).map(r => {
+				return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
+						<Link to={`/movie/${r.id}`}>
+							<div className='search-image'>
+								<img src={API.image(r.poster_path, 'w200')}/>
+							</div>
+
+							<div className="search-content">
+								<div className="search-name">
+									{(r.title ? r.title : r.name)}
+								</div>
+
+								<div className="search-description">
+									{r.overview}
+								</div>
+							</div>
+						</Link>
+						</div>
+			})
+		)
+	}
+
 	return (
 		<header>
 			<div className="up-header">
@@ -20,9 +121,14 @@ function Header() {
 				</div>
 
 				<div className="search">
-					<input type="text" placeholder="Busque por filmes, séries ou celebridades" autoComplete="off"/>
+					<input type="text" value={search} onChange={handleChange} placeholder="Busque por filmes, séries ou celebridades" autoComplete="off"/>
 					<div className="search-result">
-
+						{/* Filmes */}
+						{renderResults()}
+						{/* Séries */}
+						{renderResultsTv()}
+						{/* Celebridades */}
+						{renderResultsPerson()}
 					</div>
 				</div>
 			</div>
