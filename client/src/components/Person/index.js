@@ -15,14 +15,16 @@ function Person() {
 		API.genres().then(r => {
 			setGenres(r.data.genres);
 		})
-
+		
 		API.person.detail(id).then(r => {
-			console.log(r.data);
+			// console.log(r.data);
 			setPerson(r.data);
+			window.scrollTo(0, 0);
+			document.title = `${r.data.name} | ${r.data.known_for_department}`
 		});
 
 		API.person.credits(id).then(r => {
-			console.log(r);
+			// console.log(r);
 		});
 
 	}, [id]);
@@ -36,9 +38,10 @@ function Person() {
 			return(
 				<>
 					<div className="realease-date">Nascimento: <b>{ formatDate( person.birthday) }</b></div>
-					{/* <div className="duration">Duração: <b>{ (movie.runtime ? movie.runtime : movie.episode_run_time[0]) }m</b></div> */}
-					{/* <div className="budget">Orçamento: <b>{ formatValue(movie.budget) }</b></div> */}
-					{/* <div className="revenue">Faturamento: <b>{ formatValue(movie.revenue) }</b> </div> */}
+					{(person.deathday ? 
+						<div className="release-date">
+							Morte: <b>{formatDate(person.deathday) }</b>
+						</div> : '')}
 				</>
 			)
 		}
@@ -62,7 +65,6 @@ function Person() {
 						<div className="movie-director">
 							Nascido em: {person.place_of_birth}
 						</div>
-
 						
 					</div>
 					<div className="movie-footer">

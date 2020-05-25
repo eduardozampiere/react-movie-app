@@ -24,10 +24,11 @@ function MovieDetail(props) {
 		medias[media].detail(id).then(r => {
 			setMovie(r.data);
 			console.log(r.data);
-
+			document.title = (r.data.title ? r.data.title : r.data.name );
+			window.scrollTo(0, 0);
+			
 			medias[media].credits(id).then(cr => {
 				setCast(cr.data.cast);
-				window.scrollTo(0, 0);
 				if(media === 'movie'){
 					for(let i = 0; i < cr.data.crew.length; i++){
 						let c = cr.data.crew[i];

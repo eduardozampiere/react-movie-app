@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import API from '../../api/api';
 import { Link } from 'react-router-dom';
 
+import SlideButton from '../SlideButton';
+
 import './style.css';
 
 
@@ -10,11 +12,11 @@ function Section(props) {
 	const genres = props.genres;
 	const [movies, setMovies] = useState([]);
 	const f = props.f;
-	const limit = props.limit;
+	const [showAll, setShowAll] = useState(false);
 	const to = props.to ? props.to : 'movie';
 	useEffect( () => {
 		f().then( r => {
-			console.log(r.data.results);
+			console.log(r);
 			if(r.data.results) setMovies(r.data.results);
 			else if(props.crew){
 				if(r.data.crew) setMovies(r.data.crew);
@@ -38,7 +40,7 @@ function Section(props) {
 
 	function renderMovies(movies){
 		let aux = [];
-		if(limit) aux = movies.slice(0, limit);
+		if(!showAll) aux = movies.slice(0, 5);
 		else aux = movies;
 		return aux.map(movie => {
 			return (
@@ -66,14 +68,22 @@ function Section(props) {
 		});
 	}
 
+	function handleClick(){
+		setShowAll( (!showAll) );
+	}
+
 	if(movies.length <= 0){
 		return <></>
 	}
 
 	return (
 			<section>
-				<div>
+				<div className="section-header">
 					<h3>{props.title}</h3>
+					<div>
+						<span>Mostrar todos</span>
+						<SlideButton  onClick={handleClick}/>
+					</div>
 				</div>
 				<section>
 					{renderMovies(movies)}

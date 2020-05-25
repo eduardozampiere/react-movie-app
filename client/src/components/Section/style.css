@@ -6,6 +6,23 @@ main > section > section{
     padding-right: 80px;
 }
 
+.section-header{
+    display: flex;
+    justify-content: space-between;
+    margin-right: 80px;
+}
+.switch{
+    margin-top: 30px;
+}
+
+.section-header > div > span{
+    position: relative;
+    top: 8px;
+    font-size: 14px;
+    color: #333;
+    padding-right: 10px;
+}
+
 main > section > div > h3{
     margin: 30px 0px 30px 80px;
     font-size: 25px;
