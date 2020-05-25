@@ -12,7 +12,8 @@ function MovieImages(props) {
 	useEffect( () => {
 		console.log(api);
 		api.images(id).then(r => {
-			setImages(r.data.backdrops);
+			if(r.data.backdrops) setImages(r.data.backdrops);
+			else if(r.data.profiles) setImages(r.data.profiles);
 		});
 	}, [id]);
 
@@ -34,9 +35,9 @@ function MovieImages(props) {
 	function renderImages(){
 		return images.map( (p, i) => {
 			return (
-					<>
-						<img src={API.image(p.file_path, 'w200')} onClick={() => showImage(p.file_path, i)}/>
-					</>
+					
+					<img key={i} src={API.image(p.file_path, 'w200')} onClick={() => showImage(p.file_path, i)}/>
+					
 				)
 		});
 	}
@@ -57,7 +58,7 @@ function MovieImages(props) {
 
 	return(
 		<>
-			<div id="open-image">
+			<div id="open-image" className={(props.to === 'person' ? 'photo': '')}>
 				<div id="close" onClick={closeImage}>
 					
 				</div>

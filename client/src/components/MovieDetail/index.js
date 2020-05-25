@@ -100,6 +100,7 @@ function MovieDetail(props) {
 		}
 
 	function formatDate(date){
+		if(!date) return false;
 		return date.split('-').reverse().join('/');
 	}
 

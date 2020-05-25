@@ -15,7 +15,12 @@ function Section(props) {
 	useEffect( () => {
 		f().then( r => {
 			console.log(r.data.results);
-			setMovies(r.data.results);
+			if(r.data.results) setMovies(r.data.results);
+			else if(props.crew){
+				if(r.data.crew) setMovies(r.data.crew);
+			}
+			else if(r.data.cast) setMovies(r.data.cast);
+
 		});
 	}, [f]);
 
@@ -59,6 +64,10 @@ function Section(props) {
 				</div>
 			)
 		});
+	}
+
+	if(movies.length <= 0){
+		return <></>
 	}
 
 	return (

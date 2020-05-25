@@ -2,6 +2,7 @@ import React, {Suspense, lazy} from 'react';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';// import { Container } from './styles';
 
 import Container from '../components/Container';
+import Person from '../components/Person';
 
 const Home = lazy(() => import('../components/Home'));
 const HomeTv = lazy(() => import('../components/HomeTv'));
@@ -27,7 +28,7 @@ function Routes() {
 
 					<Route exact path="/person/:id">
 						<Container>
-							<h1>Person page</h1>
+							<Person />
 						</Container>
 					</Route>
 

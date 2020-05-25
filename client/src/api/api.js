@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {API_AUTH_KEY, API_MOVIE_URL, API_LANG, API_PERSON_URL, API_SEARCH, API_GENRES, API_TV_URL} from '../config.json';
+import {API_AUTH_KEY, API_MOVIE_URL, API_LANG, API_PERSON_URL, API_SEARCH, API_GENRES, API_TV_URL, API_TRENDS_URL} from '../config.json';
 
 
 
@@ -50,6 +50,10 @@ const API = {
 
 		images: async (movie_id) => {
 			return await axios.get(`${API_MOVIE_URL}/${movie_id}/images?api_key=${API_AUTH_KEY}`);
+		},
+
+		trends: async () => {
+			return await axios.get(`${API_TRENDS_URL}/movie/day?api_key=${API_AUTH_KEY}`);
 		}
 
 	},
@@ -58,8 +62,14 @@ const API = {
 		credits: async (person_id) => {
 			return await axios.get(`${API_PERSON_URL}/${person_id}/movie_credits?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
 		},
+		creditsTv: async (person_id) => {
+			return await axios.get(`${API_PERSON_URL}/${person_id}/tv_credits?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
+		},
 		detail: async (person_id)=>{
 			return await axios.get(`${API_PERSON_URL}/${person_id}?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
+		},
+		images: async (person_id) => {
+			return await axios.get(`${API_PERSON_URL}/${person_id}/images?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
 		}
 	},
 
@@ -118,6 +128,10 @@ const API = {
 
 		seasons: async (movie_id) => {
 			return await axios.get(`${API_TV_URL}/${movie_id}/images?api_key=${API_AUTH_KEY}`);
+		},
+
+		trends: async () => {
+			return await axios.get(`${API_TRENDS_URL}/tv/day?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
 		}
 	}
 }
