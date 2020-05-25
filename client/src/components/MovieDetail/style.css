@@ -90,25 +90,27 @@ div.movie{
 .movie-director > a{
     color: #ccc;
     text-decoration: none;
+    margin-right: 10px;
+
 }
 
 .movie-director > a:hover{
     text-decoration: underline;
 }
 
-.movie-actors{
+.movie-actors, .movie-companies{
     margin-left: 20px;
     margin-top: 8px;
     font-size: 14px;
 }
 
-.movie-actors > a{
+.movie-actors > a, .movie-companies > a{
     color: #ccc;
     text-decoration: none;
     margin-right: 10px;
 }
 
-.movie-actors > a:hover{
+.movie-actors > a:hover, .movie-companies > a:hover{
     text-decoration: underline;
 }
 

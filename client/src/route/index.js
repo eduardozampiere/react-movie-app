@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';// impor
 import Container from '../components/Container';
 
 const Home = lazy(() => import('../components/Home'));
+const HomeTv = lazy(() => import('../components/HomeTv'));
 const MovieDetail = lazy(() => import('../components/MovieDetail'));
 
 function Routes() {
@@ -18,7 +19,13 @@ function Routes() {
 						</Container>
 					</Route>
 
-					<Route extac path="/movie/:id">
+					<Route exact path="/tv">
+						<Container>
+							<HomeTv />
+						</Container>
+					</Route>
+
+					<Route extac path="/:media/:id">
 						<Container>
 							<MovieDetail />
 						</Container>

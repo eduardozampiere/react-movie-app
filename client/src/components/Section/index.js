@@ -11,6 +11,7 @@ function Section(props) {
 	const [movies, setMovies] = useState([]);
 	const f = props.f;
 	const limit = props.limit;
+	const to = props.to ? props.to : 'movie';
 	useEffect( () => {
 		f().then( r => {
 			console.log(r.data.results);
@@ -25,7 +26,6 @@ function Section(props) {
 				if(g.id === id){											
 					return <span key={g.id}>{g.name}</span>
 				}
-				// return <></>
 				return false;
 			})
 		})
@@ -38,13 +38,13 @@ function Section(props) {
 		return aux.map(movie => {
 			return (
 				<div className="movie-card" key={`${movie.id}`}>
-					<Link to={`/movie/${movie.id}`}>
+					<Link to={`/${to}/${movie.id}`}>
 						<div className="movie-poster">
 							<img alt={movie.title} src={API.image(movie.poster_path)}/>
 						</div>
 						<div className="movie-body">
 							<div className="movie-title">
-								<span>{movie.title}</span>
+								<span>{(movie.title ? movie.title : movie.name)}</span>
 							</div>
 							<div className="movie-badge">
 								<span>{movie.vote_average}</span>

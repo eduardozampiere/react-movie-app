@@ -3,33 +3,45 @@ import { useParams, Link } from 'react-router-dom';
 
 import Section from '../Section';
 import Elenco from '../Elenco';
+import MovieImages from '../MovieImages';
 import API from '../../api/api';
 
 import './style.css';
+
+const medias = {
+	'tv': API.tv,
+	'movie': API.movies
+}
+
 function MovieDetail(props) {
-	const {id} = useParams();
+	const {id, media} = useParams();
 	const [movie, setMovie] = useState({});
 	const [cast, setCast] = useState([]);
 	const [director, setDirector] = useState([]);
 	const [genres, setGenres] = useState();
-
+	
 	useEffect( () => {
-		API.movies.detail(id).then(r => {
+		medias[media].detail(id).then(r => {
 			setMovie(r.data);
-		});
+			console.log(r.data);
 
-		API.movies.credits(id).then(r => {
-			setCast(r.data.cast);
-
-			for(let i = 0; i < r.data.crew.length; i++){
-				let c = r.data.crew[i];
-				if(c.job === 'Director'){
-					setDirector(c);
-					break;
+			medias[media].credits(id).then(cr => {
+				setCast(cr.data.cast);
+				window.scrollTo(0, 0);
+				if(media === 'movie'){
+					for(let i = 0; i < cr.data.crew.length; i++){
+						let c = cr.data.crew[i];
+						if(c.job === 'Director'){
+							setDirector([c]);
+							break;
+						}
+					}
 				}
-			}
+				else{
+					setDirector(r.data.created_by);
+				}
+			});
 		});
-
 		API.genres().then(r => {
 			setGenres(r.data.genres);
 		})
@@ -44,17 +56,55 @@ function MovieDetail(props) {
 		})
 	}
 
+	function renderDirectors(){
+
+		return director.map(a => {
+			return <Link key={a.id} to={`/person/${a.id}`}>{a.name}</Link>
+		})
+	}
+
+	function renderCompanies(data){
+
+		return data.map(a => {
+			return <Link key={a.id} to={`/company/${a.id}`}>{a.name}</Link>
+		})
+	}
+
 	function renderGenres(){
 		return movie.genres.map(g => {
 			return <span key={g.id}>{g.name}</span>
 		});
 	}
 
+	function renderMovieFooter(movie){
+			if(media === 'movie')
+				return(
+					<>
+						<div className="realease-date">Lançamento: <b>{ formatDate( (movie.release_date ? movie.release_date : movie.first_air_date)) }</b></div>
+						<div className="duration">Duração: <b>{ (movie.runtime ? movie.runtime : movie.episode_run_time[0]) }m</b></div>
+						<div className="budget">Orçamento: <b>{ formatValue(movie.budget) }</b></div>
+						<div className="revenue">Faturamento: <b>{ formatValue(movie.revenue) }</b> </div>
+					</>
+				)
+			
+			else
+				return(
+					<>
+						<div className="realease-date">Lançamento: <b>{ formatDate( (movie.release_date ? movie.release_date : movie.first_air_date)) }</b></div>
+						<div className="duration">Duração: <b>{ (movie.runtime ? movie.runtime : movie.episode_run_time[0]) }m</b></div>
+						<div className="budget">Temporadas: <b>{ movie.number_of_seasons }</b></div>
+						<div className="revenue">Ultimo episódio: <b>{ formatDate(movie.last_air_date) }</b> </div>
+					</>
+				)
+			
+		}
+
 	function formatDate(date){
 		return date.split('-').reverse().join('/');
 	}
 
 	function formatValue(value){
+		if(!value) return false
 		let n = value.toString();
 		let t = n.length;
 		let money = '';
@@ -70,7 +120,7 @@ function MovieDetail(props) {
 		return `$ ${money}`;
 	}
 
-	if(!movie.title){
+	if(!movie.title && !movie.name){
 		return <span>Loading</span>
 	}
 	return (
@@ -81,7 +131,7 @@ function MovieDetail(props) {
 				</div>
 				<div className="movie-detail">
 					<div className="movie-header">
-						<div className="movie-title">{ movie.title } | <small>{ movie.original_title }</small></div>
+						<div className="movie-title">{ (movie.title ? movie.title : movie.name) } | <small>{ (movie.original_title ? movie.original_title : movie.original_name) }</small></div>
 						<div className="movie-rate">{ movie.vote_average }</div>
 					</div>
 					<div className="movie-overview">{ movie.overview }</div>
@@ -90,25 +140,27 @@ function MovieDetail(props) {
 							renderGenres()
 						}
 					</div>
-					<div className="movie-casting">
+					<div className="movie-casting">		
 						<div className="movie-director">
-							Diretor: <Link to={`/person/${director.id}`}>{director.name}</Link>
+							Diretor: {renderDirectors()}
 						</div>
 
 						<div className="movie-actors">
 							Elenco: {renderFristActors()}
 						</div>
+
+						<div className="movie-companies">
+							Estúdio: {renderCompanies(movie.production_companies)}
+						</div>
 					</div>
 					<div className="movie-footer">
-						<div className="realease-date">Lançamento: <b>{ formatDate(movie.release_date) }</b></div>
-						<div className="duration">Duração: <b>{ movie.runtime }m</b></div>
-						<div className="budget">Orçamento: <b>{ formatValue(movie.budget) }</b></div>
-						<div className="revenue">Faturamento: <b>{ formatValue(movie.revenue) }</b> </div>
+						{renderMovieFooter(movie)}
 					</div>
 				</div>
 			</div>
-			
-			<Section title="Recomendados" f={() => API.movies.recommendations(id)} genres={genres} limit={5}/>
+			<MovieImages id={id}/>
+
+			<Section title="Recomendados" f={() => medias[media].recommendations(id)} genres={genres} to={media} limit={5}/>
 			
 			<Elenco cast={cast}/>
 		</>
