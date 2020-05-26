@@ -1,5 +1,11 @@
 import axios from 'axios';
-import {API_AUTH_KEY, API_MOVIE_URL, API_LANG, API_PERSON_URL, API_SEARCH, API_GENRES, API_TV_URL, API_TRENDS_URL} from '../config.json';
+import {
+		API_AUTH_KEY, API_MOVIE_URL, API_LANG, API_PERSON_URL, API_SEARCH,
+		API_GENRES, API_TV_URL, API_TRENDS_URL, API_CERTIFICATE_MOVIE,
+		API_DISCOVERY_MOVIE
+
+	
+	} from '../config.json';
 
 
 
@@ -9,10 +15,12 @@ const API = {
 		return `https://image.tmdb.org/t/p/${size}/${img}`;
 	},
 
-	genres: async () => {
-		return await axios.get(`${API_GENRES}?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
+	genres: async (lang=API_LANG) => {
+		return await axios.get(`${API_GENRES}?api_key=${API_AUTH_KEY}&language=${lang}`);
 	},
 
+	
+	
 	movies:{
 		popular: async (page=1) => {
 			try{
@@ -54,8 +62,22 @@ const API = {
 
 		trends: async () => {
 			return await axios.get(`${API_TRENDS_URL}/movie/day?api_key=${API_AUTH_KEY}`);
-		}
+		},
 
+		certifications: async () => {
+			return await axios.get(`${API_CERTIFICATE_MOVIE}?api_key=${API_AUTH_KEY}`);
+		},
+
+		discovery: async (obj) => {
+			let url = `${API_DISCOVERY_MOVIE}?api_key=${API_AUTH_KEY}`;
+			for(let i in obj){
+				if(obj[i]){
+					url += `&${i}=${obj[i]}`
+				}
+			}
+			console.log(url);
+			return await axios.get(url);
+		}
 	},
 
 	person: {

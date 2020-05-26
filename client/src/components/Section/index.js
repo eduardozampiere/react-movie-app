@@ -13,16 +13,18 @@ function Section(props) {
 	const [movies, setMovies] = useState([]);
 	const f = props.f;
 	const [showAll, setShowAll] = useState(false);
+
+	const [load, setLoad] = useState(true);
 	const to = props.to ? props.to : 'movie';
 	useEffect( () => {
+		setLoad(true);
 		f().then( r => {
-			console.log(r);
 			if(r.data.results) setMovies(r.data.results);
 			else if(props.crew){
 				if(r.data.crew) setMovies(r.data.crew);
 			}
 			else if(r.data.cast) setMovies(r.data.cast);
-
+			setLoad(false);
 		});
 	}, [f]);
 
@@ -62,6 +64,15 @@ function Section(props) {
 								renderMovieFooter(movie)
 							}
 						</div>
+							{
+								(movie.character ? 
+									<div className="movie-character"><span>{movie.character}</span></div> 
+									
+									: (movie.job ? 
+									<div className="movie-character"><span>{movie.job}</span></div>										
+										
+										: ''))
+								}
 					</Link>
 				</div>
 			)
@@ -70,6 +81,10 @@ function Section(props) {
 
 	function handleClick(){
 		setShowAll( (!showAll) );
+	}
+
+	if(load){
+		return <p>Carregando...</p>
 	}
 
 	if(movies.length <= 0){

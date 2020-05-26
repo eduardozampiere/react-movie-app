@@ -1,0 +1,49 @@
+.discovery{
+    width: calc(100% - 160px);
+    box-shadow: 1px 1px 2px #666;
+    border-radius: 4px;
+    margin-left: 80px;
+    margin-top: 20px;
+}
+
+.discovery form{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 10px 10px 15px 10px;
+}
+
+.discovery > form > div{
+    margin-left: 10px;
+    padding-right: 15px;
+    margin-top: 15px;
+    border-right: 1px solid #ccc;
+}
+
+.discovery > form > div > label{
+    font-size: 14px;
+    color: #222;
+    padding-right: 10px;
+}
+
+.discovery > form > div > select{
+    padding: 5px 15px;
+    border: solid 1px #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    outline: none;
+}
+
+@media (max-width: 767px){
+    .discovery{
+        width: calc(100% - 40px);
+        box-shadow: 1px 1px 2px #666;
+        border-radius: 4px;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    .discovery > form > div{
+        border: none;
+    }
+}

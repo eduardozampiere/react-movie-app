@@ -9,7 +9,6 @@ import './style.css';
 function Person() {
 	const {id} = useParams();
 	const [person, setPerson] = useState({});
-	const [images, setImages] = useState([]);
 	const [genres, setGenres] = useState([]);
 	useEffect( () => {
 		API.genres().then(r => {
@@ -17,14 +16,10 @@ function Person() {
 		})
 		
 		API.person.detail(id).then(r => {
-			// console.log(r.data);
+			console.log(r.data);
 			setPerson(r.data);
 			window.scrollTo(0, 0);
 			document.title = `${r.data.name} | ${r.data.known_for_department}`
-		});
-
-		API.person.credits(id).then(r => {
-			// console.log(r);
 		});
 
 	}, [id]);

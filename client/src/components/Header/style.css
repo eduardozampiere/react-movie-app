@@ -16,13 +16,14 @@ header > .up-header{
 }
 
 header > .down-header{
-    display: flex;
-    flex-direction: row;
+    display: block;
+    /* display: flex; */
+    /* flex-direction: row; */
     /* height: 37px; */
 }
 
 header > .down-header > .navbar{
-    width: 35vw;
+    /* width: 100vw; */
 }
 
 header > .down-header > .navbar > ul{
@@ -53,10 +54,11 @@ header > .down-header > .navbar > ul > li > a:hover{
 }
 
 header > .down-header > .search{
-    width: 70vw;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: center;
+    margin-top: 10px;
+
 }
 
 header > .down-header > .search > input{
@@ -112,4 +114,15 @@ header > .down-header > .search > input{
 .search-description{
     font-size: 13px;
     margin: 5px 10px;
+}
+
+
+@media (max-width:767px){
+    header > .down-header > .search > input{
+        margin-left: 20px;
+    }
+
+    .navbar{
+        width: auto !important;
+    }
 }

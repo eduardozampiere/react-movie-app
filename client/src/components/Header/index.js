@@ -113,13 +113,6 @@ function Header() {
 			</div>
 
 			<div className="down-header">
-				<div className="navbar">
-					<ul>
-						<li><Link to="/">Filmes</Link></li>
-						<li><Link to="/tv">Séries</Link></li>
-					</ul>
-				</div>
-
 				<div className="search">
 					<input type="text" value={search} onChange={handleChange} placeholder="Busque por filmes, séries ou celebridades" autoComplete="off"/>
 					<div className="search-result">
@@ -130,6 +123,15 @@ function Header() {
 						{/* Celebridades */}
 						{renderResultsPerson()}
 					</div>
+				</div>
+
+
+				<div className="navbar">
+					<ul>
+						<li><Link to="/">Filmes</Link></li>
+						<li><Link to="/tv">Séries</Link></li>
+						<li><Link to="/discovery">Descubra novos filmes</Link></li>
+					</ul>
 				</div>
 			</div>
 
