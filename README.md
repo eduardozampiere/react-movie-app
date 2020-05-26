@@ -8,6 +8,9 @@ Demo --> http://astonishing-ants.surge.sh/
 * Filmes e séries recomendados
 * Informações dos atores e diretores
     * Listagem de filmes/series que o ator/diretor participou
+* Descubra novos filmes
+    * Sistema de filtros para você encontrar filmes de acordo com seus gostos
+    
 ## Prints
 
 ### Home
