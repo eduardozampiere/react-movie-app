@@ -61,7 +61,7 @@ const API = {
 		},
 
 		trends: async () => {
-			return await axios.get(`${API_TRENDS_URL}/movie/day?api_key=${API_AUTH_KEY}`);
+			return await axios.get(`${API_TRENDS_URL}/movie/day?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
 		},
 
 		certifications: async () => {

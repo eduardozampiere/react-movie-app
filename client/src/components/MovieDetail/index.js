@@ -144,7 +144,12 @@ function MovieDetail(props) {
 					</div>
 					<div className="movie-casting">		
 						<div className="movie-director">
-							Diretor: {renderDirectors()}
+							{
+								(media === 'tv' ? 'Criada por: ': 'Diretor: ')
+							}
+							{
+								renderDirectors()
+							}
 						</div>
 
 						<div className="movie-actors">

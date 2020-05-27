@@ -120,3 +120,44 @@ div.movie{
 .movie-footer > div{
 
 }
+
+@media (max-width: 767px){
+    .movie{
+        flex-direction: column !important;
+        width: calc(100% - 40px) !important;
+        margin-left: 20px !important;
+    }
+
+    .movie > .movie-poster > img{
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+
+    .movie > .movie-detail{
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    .budget, .revenue{
+        display: none;
+    }
+
+    .movie-footer{
+        margin-top: 10px;
+        font-size: 0.8em !important;
+        grid-template-columns: 2fr 1fr !important;
+        border-radius: 0 0 4px 4px;
+    }
+
+    .movie-overview{
+        height: auto;
+        max-height: 200px;
+    }
+
+
+    .movie-genres > span{
+        padding: 5px 15px;
+        font-size: 12px;
+    }
+}

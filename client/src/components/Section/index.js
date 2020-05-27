@@ -88,7 +88,18 @@ function Section(props) {
 	}
 
 	if(movies.length <= 0){
-		return <></>
+		return (
+			<>
+			<div className="section-header">
+				<h3>{props.title}</h3>
+				<div>
+					<span>Mostrar todos</span>
+					<SlideButton  onClick={handleClick}/>
+				</div>
+			</div>
+			<p>Nada encontrado</p>
+			</>
+		)
 	}
 
 	return (
