@@ -2,7 +2,7 @@ import axios from 'axios';
 import {
 		API_AUTH_KEY, API_MOVIE_URL, API_LANG, API_PERSON_URL, API_SEARCH,
 		API_GENRES, API_TV_URL, API_TRENDS_URL, API_CERTIFICATE_MOVIE,
-		API_DISCOVERY_MOVIE
+		API_DISCOVERY_MOVIE, API_COMPANY_URL, API_DISCOVERY_TV
 
 	
 	} from '../config.json';
@@ -19,7 +19,9 @@ const API = {
 		return await axios.get(`${API_GENRES}?api_key=${API_AUTH_KEY}&language=${lang}`);
 	},
 
-	
+	company: async (id) => {
+		return await axios.get(`${API_COMPANY_URL}/${id}?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
+	},	
 	
 	movies:{
 		popular: async (page=1) => {
@@ -106,6 +108,10 @@ const API = {
 
 		person: async (person) => {
 			return await axios.get(`${API_SEARCH}/person?api_key=${API_AUTH_KEY}&language=${API_LANG}&query=${person}`);
+		},
+
+		company: async (company) => {
+			return await axios.get(`${API_SEARCH}/company?api_key=${API_AUTH_KEY}&language=${API_LANG}&query=${company}`);
 		}
 	},
 
@@ -154,6 +160,17 @@ const API = {
 
 		trends: async () => {
 			return await axios.get(`${API_TRENDS_URL}/tv/day?api_key=${API_AUTH_KEY}&language=${API_LANG}`);
+		},
+
+		discovery: async (obj) => {
+			let url = `${API_DISCOVERY_TV}?api_key=${API_AUTH_KEY}`;
+			for(let i in obj){
+				if(obj[i]){
+					url += `&${i}=${obj[i]}`
+				}
+			}
+			console.log(url);
+			return await axios.get(url);
 		}
 	}
 }

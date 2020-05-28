@@ -8,6 +8,8 @@ function Header() {
 	const [results, setResults] = useState([]);
 	const [resultsTv, setResultsTv] = useState([]);
 	const [resultsPerson, setResultsPerson] = useState([]);
+	const [resultsCompany, setResultsCompany] = useState([]);
+
 	useEffect( () => {
 		if(search.length > 3){
 			API.search.movie(search).then(r => {
@@ -16,7 +18,10 @@ function Header() {
 				API.search.tv(search).then(t => {
 					setResultsTv(t.data.results);
 					API.search.person(search).then(p => {
-						setResultsPerson(p.data.results)
+						setResultsPerson(p.data.results);
+						API.search.company(search).then(p => {
+							setResultsCompany(p.data.results);
+						});
 					});
 				})
 			})
@@ -33,7 +38,6 @@ function Header() {
 
 
 	function renderResultsPerson(){
-		console.log(resultsPerson)
 		return resultsPerson.slice(0, 10).map(r => {
 			return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
 					<Link to={`/person/${r.id}`}>
@@ -57,7 +61,6 @@ function Header() {
 
 
 	function renderResultsTv(){
-		console.log(resultsTv);
 		return resultsTv.slice(0, 10).map(r => {
 			return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
 					<Link to={`/tv/${r.id}`}>
@@ -104,6 +107,27 @@ function Header() {
 		)
 	}
 
+
+	function renderResultsCompany(){
+		return (
+			resultsCompany.slice(0, 10).map(r => {
+				return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
+						<Link to={`/company/${r.id}`}>
+							<div className='search-image'>
+								<img src={API.image(r.logo_path, 'w200')}/>
+							</div>
+
+							<div className="search-content">
+								<div className="search-name">
+									{r.name}
+								</div>
+							</div>
+						</Link>
+						</div>
+			})
+		)
+	}
+
 	return (
 		<header>
 			<div className="up-header">
@@ -122,6 +146,7 @@ function Header() {
 						{renderResultsTv()}
 						{/* Celebridades */}
 						{renderResultsPerson()}
+						{renderResultsCompany()}
 					</div>
 				</div>
 
