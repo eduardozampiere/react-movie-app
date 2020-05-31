@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 
 import API from '../../api/api';
 
@@ -10,12 +9,11 @@ function MovieImages(props) {
 	const [openedImage, setOpenedImage] = useState(0);
 
 	useEffect( () => {
-		console.log(api);
 		api.images(id).then(r => {
 			if(r.data.backdrops) setImages(r.data.backdrops);
 			else if(r.data.profiles) setImages(r.data.profiles);
 		});
-	}, [id]);
+	}, [id, api]);
 
 	function showImage(url, i){
 		setOpenedImage(i);
@@ -34,10 +32,8 @@ function MovieImages(props) {
 
 	function renderImages(){
 		return images.map( (p, i) => {
-			return (
-					
-					<img key={i} src={API.image(p.file_path, 'w200')} onClick={() => showImage(p.file_path, i)}/>
-					
+			return (	
+					<img key={i} src={API.image(p.file_path, 'w200')} onClick={() => showImage(p.file_path, i)} alt="Foto extra"/>
 				)
 		});
 	}
@@ -63,7 +59,7 @@ function MovieImages(props) {
 					
 				</div>
 				<div className="backward" onClick={() => changeImage(-1)}></div>
-				<img src="#" />
+				<img alt="Imagem grande" aria-hidden="true" src="https://centralcabos.vteximg.com.br/arquivos/ids/159950-400-400/produto_sem_foto.gif?v=635922653155000000" />
 				<div className="forward" onClick={() => changeImage(1)}></div>
 			</div>
 			<div className="images-movie">

@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 import SlideButton from '../SlideButton';
 function Elenco(props) {
 	const cast = props.cast;
-
 	const [limit, setLimit] = useState(5);
 	const [showAll, setShowAll] = useState(false);
 

@@ -16,7 +16,6 @@ function Person() {
 		})
 		
 		API.person.detail(id).then(r => {
-			console.log(r.data);
 			setPerson(r.data);
 			window.scrollTo(0, 0);
 			document.title = `${r.data.name} | ${r.data.known_for_department}`

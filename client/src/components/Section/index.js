@@ -6,8 +6,6 @@ import SlideButton from '../SlideButton';
 
 import './style.css';
 
-
-
 function Section(props) {
 	const genres = props.genres;
 	const [movies, setMovies] = useState([]);
@@ -26,7 +24,7 @@ function Section(props) {
 			else if(r.data.cast) setMovies(r.data.cast);
 			setLoad(false);
 		});
-	}, [f]);
+	}, [f, props.crew]);
 
 
 	function renderMovieFooter(movie){
@@ -46,7 +44,7 @@ function Section(props) {
 		else aux = movies;
 		return aux.map(movie => {
 			return (
-				<div className="movie-card" key={`${movie.id}`}>
+				<div className="movie-card" key={`${props.title}-${movie.id}-${movie.job}`}>
 					<Link to={`/${to}/${movie.id}`}>
 						<div className="movie-poster">
 							<img alt={movie.title} src={API.image(movie.poster_path)}/>

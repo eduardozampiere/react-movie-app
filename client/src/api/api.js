@@ -71,13 +71,12 @@ const API = {
 		},
 
 		discovery: async (obj) => {
-			let url = `${API_DISCOVERY_MOVIE}?api_key=${API_AUTH_KEY}`;
+			let url = `${API_DISCOVERY_MOVIE}?api_key=${API_AUTH_KEY}&language=${API_LANG}`;
 			for(let i in obj){
 				if(obj[i]){
 					url += `&${i}=${obj[i]}`
 				}
 			}
-			console.log(url);
 			return await axios.get(url);
 		}
 	},
@@ -163,13 +162,12 @@ const API = {
 		},
 
 		discovery: async (obj) => {
-			let url = `${API_DISCOVERY_TV}?api_key=${API_AUTH_KEY}`;
+			let url = `${API_DISCOVERY_TV}?api_key=${API_AUTH_KEY}&language=${API_LANG}`;
 			for(let i in obj){
 				if(obj[i]){
 					url += `&${i}=${obj[i]}`
 				}
 			}
-			console.log(url);
 			return await axios.get(url);
 		}
 	}

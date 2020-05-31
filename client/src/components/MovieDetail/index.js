@@ -23,7 +23,6 @@ function MovieDetail(props) {
 	useEffect( () => {
 		medias[media].detail(id).then(r => {
 			setMovie(r.data);
-			console.log(r.data);
 			document.title = (r.data.title ? r.data.title : r.data.name );
 			window.scrollTo(0, 0);
 			
@@ -47,7 +46,7 @@ function MovieDetail(props) {
 			setGenres(r.data.genres);
 		})
 	
-	}, [id]);
+	}, [id, media]);
 
 
 	function renderFristActors(){

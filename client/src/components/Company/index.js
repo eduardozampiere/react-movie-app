@@ -16,31 +16,30 @@ function Company() {
 
 		API.company(id).then(r => {
 			setCompany(r.data);
-			console.log(r.data);
 		});
 
 	}, [id]);
 
 	return (
 		<>
-			<div className="movie">
-				<div className="movie-poster">
+			<div className="company">
+				<div className="company-poster">
 					<img alt={company.name} src={API.image(company.logo_path)}/>
 				</div>
-				<div className="movie-detail">
-					<div className="movie-header">			
-						<div className="movie-title">{ company.name } | {company.origin_country}</div>
+				<div className="company-detail">
+					<div className="company-header">			
+						<div className="company-title">{ company.name } | {company.origin_country}</div>
 					</div>
-					<div className="movie-overview">{ company.description }</div>
-					<div className="movie-genres">
+					<div className="company-overview">{ company.description }</div>
+					<div className="company-genres">
 					</div>
-					<div className="movie-casting">		
-						<div className="movie-director">
+					<div className="company-casting">		
+						<div className="company-director">
 							Localizado em: {company.headquarters}
 						</div>
 						
 					</div>
-					<div className="movie-footer">
+					<div className="company-footer">
 						Site: <a href={company.homepage}>{company.homepage}</a>
 					</div>
 				</div>

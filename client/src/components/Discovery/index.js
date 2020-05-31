@@ -8,7 +8,7 @@ function Discovery() {
 	const [certifications, setCertifications] = useState([]);
 	const [years, setYears] = useState([]);
 
-	const [media, setMedia] = useState('');
+	// const [media, setMedia] = useState('');
 	const [language, setLanguage] = useState(null);
 	const [certificate, setCertificate] = useState(null);
 	const [year, setYear] = useState(null);
@@ -18,6 +18,7 @@ function Discovery() {
 
 
 	useEffect( () => {
+		document.title = "Discovery | React Movies"
 		const y = new Date().getFullYear();
 		const arr = [];
 		for(let i = 1874; i <= y; i++){

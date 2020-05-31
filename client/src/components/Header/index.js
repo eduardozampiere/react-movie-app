@@ -42,7 +42,7 @@ function Header() {
 			return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
 					<Link to={`/person/${r.id}`}>
 						<div className='search-image'>
-							<img src={API.image(r.profile_path, 'w200')}/>
+							<img src={API.image(r.profile_path, 'w200')} alt="Celebridade"/>
 						</div>
 
 						<div className="search-content">
@@ -65,7 +65,7 @@ function Header() {
 			return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
 					<Link to={`/tv/${r.id}`}>
 						<div className='search-image'>
-							<img src={API.image(r.poster_path, 'w200')}/>
+							<img src={API.image(r.poster_path, 'w200')} alt="Séries"/>
 						</div>
 
 						<div className="search-content">
@@ -89,7 +89,7 @@ function Header() {
 				return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
 						<Link to={`/movie/${r.id}`}>
 							<div className='search-image'>
-								<img src={API.image(r.poster_path, 'w200')}/>
+								<img src={API.image(r.poster_path, 'w200')} alt="Filmes"/>
 							</div>
 
 							<div className="search-content">
@@ -114,7 +114,7 @@ function Header() {
 				return <div key={r.id} onClick={() => {document.getElementsByClassName('search-result')[0].style.display = 'none'}}>
 						<Link to={`/company/${r.id}`}>
 							<div className='search-image'>
-								<img src={API.image(r.logo_path, 'w200')}/>
+								<img src={API.image(r.logo_path, 'w200')} alt="Produtoras"/>
 							</div>
 
 							<div className="search-content">
